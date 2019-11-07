@@ -1,0 +1,2 @@
+#!/opt/vyatta/bin/cliexpr
+commit:expression: $VAR(../l2tp-session/) != "" ; "$VAR(../@) mtu $VAR(@): l2tp-session does not exist"

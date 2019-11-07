@@ -1,0 +1,3 @@
+#!/opt/vyatta/bin/cliexec
+vyatta-interfaces.pl --dev $VAR(../@) --check-vif $VAR(@) && \
+    interface-address-check "$VAR(../@).$VAR(@)" "$VAR(./address/@@)"

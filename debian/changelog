@@ -1,0 +1,5 @@
+vyatta-interfaces-l2tpeth (0.1.12) unstable; urgency=low
+
+  * DANOS import
+
+ -- Vyatta Package Maintainers <DL-vyatta-help@att.com>  Tue, 05 Nov 2019 09:14:05 +0000

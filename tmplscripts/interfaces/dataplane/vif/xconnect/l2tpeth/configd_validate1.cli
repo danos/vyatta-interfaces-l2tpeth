@@ -1,0 +1,2 @@
+#!/opt/vyatta/bin/cliexpr
+commit:expression: $VAR(@) in $VAR(/interfaces/l2tpeth/@@) ; "'$VAR(@)' does not exist"

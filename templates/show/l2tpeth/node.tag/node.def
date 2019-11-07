@@ -1,0 +1,2 @@
+help: Show specified l2tpeth session information
+run: ${vyatta_bindir}/vplane-l2tpeth-show.pl "$3"

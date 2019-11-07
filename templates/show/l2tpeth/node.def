@@ -1,0 +1,2 @@
+help: Show l2tpv3 static session information
+run: vplane-l2tpeth-show.pl ""

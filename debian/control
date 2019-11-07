@@ -1,0 +1,64 @@
+Source: vyatta-interfaces-l2tpeth
+Section: contrib/net
+Priority: extra
+Maintainer: Vyatta Package Maintainers <DL-vyatta-help@att.com>
+Build-Depends: debhelper (>= 9), dh-yang, cpio
+Standards-Version: 3.9.6
+
+Package: vyatta-interfaces-l2tpeth
+Architecture: all
+Depends:
+ bmon (>= 3.5),
+ vyatta-cfg,
+ vyatta-interfaces (>= 0.5),
+ vyatta-op-network,
+ ${misc:Depends},
+ ${perl:Depends},
+ libvyatta-dataplane-proto-support
+Conflicts:
+ vyatta-op (<< 1.0),
+ vyatta-interfaces-l2tpeth-v1-yang (<< 0.1.0),
+ vyatta-interfaces-vhost-xconnect-v1-yang (<< 0.1.0),
+ vyatta-xconnect-v1-yang (<< 0.1.0)
+Replaces:
+ vyatta-op (<< 1.0),
+ vyatta-interfaces-l2tpeth-v1-yang (<< 0.1.0),
+ vyatta-interfaces-vhost-xconnect-v1-yang (<< 0.1.0),
+ vyatta-xconnect-v1-yang (<< 0.1.0)
+Description: Vyatta L2TPETH dataplane interface
+ Layer 2 Tunnel Protocol Version 3 (L2TPv3) tunnel interfaces system.
+
+Package: vyatta-interfaces-l2tpeth-v1-yang
+Architecture: all
+Depends:
+ ifmgrd,
+ vyatta-interfaces-l2tpeth (>= ${source:Version}),
+ ${misc:Depends},
+ ${yang:Depends}
+Description: Vyatta L2TPETH dataplane interface
+ The YANG module for Layer 2 Tunnel Protocol Version 3 (L2TPv3) interfaces.
+
+Package: vyatta-xconnect-v1-yang
+Architecture: all
+Depends:
+ vyatta-interfaces-l2tpeth (>= ${source:Version}),
+ ${misc:Depends},
+ ${yang:Depends}
+Description: vyatta-xconnect-v1 module
+ The YANG module for vyatta-xconnect-v1
+
+Package: vyatta-interfaces-vhost-xconnect-v1-yang
+Architecture: all
+Depends:
+ vyatta-interfaces-l2tpeth (>= ${source:Version}),
+ ${misc:Depends},
+ ${yang:Depends}
+Description: Yang module for vhost interface xconnect configuration
+ The YANG module for vyatta-interfaces-vhost-xconnect-v1
+
+Package: vyatta-op-show-interfaces-l2tpeth-v1-yang
+Architecture: all
+Depends: ${misc:Depends}, ${yang:Depends}, vyatta-interfaces-base
+Breaks: vyatta-ravpn (<< 0.16.6)
+Description: vyatta-op-show-interfaces-l2tpeth-v1 module
+ Operational mode integration for viewing L2TP interface configuration

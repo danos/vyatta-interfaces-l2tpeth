@@ -1,0 +1,4 @@
+help: Monitor specified l2tpeth interface
+allowed: ${vyatta_sbindir}/vyatta-interfaces.pl --show l2tpeth
+run: bmon -U -b -r 10 -p $4
+

@@ -1,0 +1,4 @@
+debian/files
+debian/vyatta-interfaces-l2tpeth.debhelper.log
+debian/vyatta-interfaces-l2tpeth.substvars
+debian/vyatta-interfaces-l2tpeth/

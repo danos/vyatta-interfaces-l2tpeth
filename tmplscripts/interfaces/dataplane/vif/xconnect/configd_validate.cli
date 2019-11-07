@@ -1,0 +1,6 @@
+#!/opt/vyatta/bin/cliexpr
+commit:expression: $VAR(./l2tpeth/) != "" || $VAR(./dataplane/) != "" || $VAR(./vhost/) != "" ; "Must configure a dataplane/vhost/l2tpeth interface"
+commit:expression: $VAR(./l2tpeth/) != "" && $VAR(./dataplane/) == "" && $VAR(./vhost/) == "" || $VAR(./dataplane/) != "" && $VAR(./l2tpeth/) == "" && $VAR(./vhost/) == "" || $VAR(./vhost/) != "" && $VAR(./dataplane/) == "" && $VAR(./l2tpeth/) == "" ; "Must configure only one of dataplane/vhost/l2tpeth interfaces"
+commit:expression: $VAR(../bridge-group) == "" ; "xconnect can not be configured with bridge-group"
+commit:expression: $VAR(../address) == "" ; "xconnect can not be configured with address"
+commit:expression: $VAR(../vrrp/vrrp-group) == "" ; "xconnect can not be configured with vrrp"

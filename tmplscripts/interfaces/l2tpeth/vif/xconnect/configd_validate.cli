@@ -1,0 +1,5 @@
+#!/opt/vyatta/bin/cliexpr
+commit:expression: $VAR(./l2tpeth/) != "" ; "Must configure the l2tpeth interface for xconnect"
+commit:expression: $VAR(../bridge-group) == "" ; "xconnect can not be configured with bridge-group"
+commit:expression: $VAR(../address) == "" ; "xconnect can not be configured with address"
+commit:expression: $VAR(../vrrp/vrrp-group) == "" ; "xconnect can not be configured with vrrp"
