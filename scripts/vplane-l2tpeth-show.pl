@@ -43,7 +43,7 @@ sub show_interface {
      
     print "\nL2tpeth interface: ", $ifinfo->{name}, "\n";
 
-    printf "   Port: %u, ifIndex: %d\n", $ifinfo->{port}, $ifinfo->{ifindex};
+    printf "   IfIndex: %d\n", $ifinfo->{ifindex};
     printf "   Mac: %s\n", $ifinfo->{ether};
 
     print "   Addresses:\n";
