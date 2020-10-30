@@ -1,11 +1,11 @@
 #!/opt/vyatta/bin/cliexpr
 commit:expression: exec "
-        if [ $VAR(./encapsulation/@) == udp  ] && [ -z \"$VAR(./local-udp-port/)\" ]; then
-                echo \"local-udp-port is required for $VAR(@) when encapsulation is udp\";
+        if [ '$VAR(./encapsulation/@)' == udp  ] && [ -z '$VAR(./local-udp-port/)' ]; then
+                echo \"local-udp-port is required for '$VAR(@)' when encapsulation is udp\";
                 exit 1;
         fi;
-        if [ $VAR(./encapsulation/@) == udp  ] && [ -z \"$VAR(./remote-udp-port/)\" ]; then
-                echo \"remote-udp-port is required for $VAR(@) when encapsulation is udp\";
+        if [ '$VAR(./encapsulation/@)' == udp  ] && [ -z '$VAR(./remote-udp-port/)' ]; then
+                echo \"remote-udp-port is required for '$VAR(@)' when encapsulation is udp\";
                 exit 1;
         fi;
 
