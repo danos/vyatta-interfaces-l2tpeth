@@ -1,3 +1,12 @@
+vyatta-interfaces-l2tpeth (0.1.13) unstable; urgency=medium
+
+  * Harden l2tpeth script
+  * Harden l2tpeth validation script
+  * Add validation to constrain encapsulation to ip or udp
+  * Avoid uninitalized value error in show l2tpeth
+
+ -- Mike Manning <mmanning@vyatta.att-mail.com>  Tue, 03 Nov 2020 09:11:48 +0000
+
 vyatta-interfaces-l2tpeth (0.1.12) unstable; urgency=low
 
   * DANOS import
