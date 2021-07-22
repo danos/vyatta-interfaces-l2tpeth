@@ -26,7 +26,7 @@ module vyatta-interfaces-l2tpeth-v1 {
 		 Web: www.att.com";
 
 	description
-		"Copyright (c) 2019, AT&T Intellectual Property.
+		"Copyright (c) 2019-2021, AT&T Intellectual Property.
 		 All rights reserved.
 
 		 Copyright (c) 2014-2016 by Brocade Communications Systems, Inc.
@@ -64,6 +64,9 @@ module vyatta-interfaces-l2tpeth-v1 {
 		 The YANG module for Layer 2 Tunnel Protocol Version 3 (L2TPv3)
 		 interfaces.";
 
+	revision 2021-07-22 {
+		description "Add constraint to disallow MTU less than 1280 on interfaces with any IPv6 configuration";
+	}
 	revision 2016-05-04 {
 		description "Add mandatory and range to l2tp-session";
 	}
@@ -131,6 +134,9 @@ module vyatta-interfaces-l2tpeth-v1 {
 				configd:update "/opt/vyatta/share/tmplscripts/interfaces/l2tpeth/mtu/configd_update.sh";
 				configd:delete "/opt/vyatta/share/tmplscripts/interfaces/l2tpeth/mtu/configd_delete.sh";
 				configd:validate "/opt/vyatta/share/tmplscripts/interfaces/l2tpeth/mtu/configd_validate1.cli";
+				must "not((current() < 1280) and ((../address[contains(., ':')]) or (../ipv6)))" {
+					error-message "MTU less than 1280 not permitted on interfaces with any IPv6 configuration.";
+				}
 			}
 			leaf disable {
 				type empty;
@@ -189,6 +195,9 @@ module vyatta-interfaces-l2tpeth-v1 {
 					configd:create "/opt/vyatta/share/tmplscripts/interfaces/l2tpeth/vif/mtu/configd_create.sh";
 					configd:update "/opt/vyatta/share/tmplscripts/interfaces/l2tpeth/vif/mtu/configd_update.sh";
 					configd:delete "/opt/vyatta/share/tmplscripts/interfaces/l2tpeth/vif/mtu/configd_delete.sh";
+					must "not((current() < 1280) and ((../address[contains(., ':')]) or (../ipv6)))" {
+						error-message "MTU less than 1280 not permitted on interfaces with any IPv6 configuration.";
+					}
 				}
 				leaf disable {
 					type empty;
