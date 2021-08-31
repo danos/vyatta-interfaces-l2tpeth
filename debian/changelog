@@ -1,3 +1,11 @@
+vyatta-interfaces-l2tpeth (0.1.14) unstable; urgency=medium
+
+  [ kalaivani vinothkumar ]
+  * Added must to restrict mtu if not default for IPv6
+  * Update constraint to not allow ipv6 and mtu
+
+ -- aroberts <aroberts@vyatta.att-mail.com>  Tue, 31 Aug 2021 19:28:27 +0100
+
 vyatta-interfaces-l2tpeth (0.1.13) unstable; urgency=medium
 
   * Harden l2tpeth script
