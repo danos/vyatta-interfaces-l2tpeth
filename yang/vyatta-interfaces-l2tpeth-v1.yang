@@ -64,6 +64,9 @@ module vyatta-interfaces-l2tpeth-v1 {
 		 The YANG module for Layer 2 Tunnel Protocol Version 3 (L2TPv3)
 		 interfaces.";
 
+	revision 2021-10-08 {
+		description "Modified mandatory to must statement in l2tp-session container and added high level must statement";
+	}
 	revision 2021-08-09 {
 		description "Add constraint to disallow MTU less than 1280 on interfaces with any IPv6 configuration";
 	}
@@ -83,6 +86,9 @@ module vyatta-interfaces-l2tpeth-v1 {
 			configd:help "L2TPv3 static tunnel interface";
 			configd:defer-actions "/opt/vyatta/sbin/vyatta-l2tpeth.pl ${COMMIT_ACTION} $VAR(@)";
 			configd:end "/opt/vyatta/share/tmplscripts/interfaces/l2tpeth/configd_end.sh";
+			must "current()/l2tp-session" {
+				error-message "L2tp-session must be configured ";
+			}
 			key "tagnode";
 			leaf tagnode {
 				type string {
@@ -225,13 +231,16 @@ module vyatta-interfaces-l2tpeth-v1 {
 				configd:begin "/opt/vyatta/share/tmplscripts/interfaces/l2tpeth/l2tp-session/configd_begin.sh";
 				configd:delete "/opt/vyatta/share/tmplscripts/interfaces/l2tpeth/l2tp-session/configd_delete.sh";
 				configd:validate "/opt/vyatta/share/tmplscripts/interfaces/l2tpeth/l2tp-session/configd_validate.cli";
+				must "not(../l2tp-session) or (encapsulation and local-ip and remote-ip and local-session-id and remote-session-id)" {
+					error-message "Encapsulation, local-ip, remote-ip, local-session-id and remote-session-id must be configured";
+				}
+
 				leaf local-ip {
 					type union {
 						type types:ipv4-address;
 						type types:ipv6-address;
 					}
 					configd:help "Local IP address for this tunnel";
-					mandatory true;
 				}
 				leaf remote-cookie {
 					type string {
@@ -269,7 +278,6 @@ module vyatta-interfaces-l2tpeth-v1 {
 						type types:ipv6-address;
 					}
 					configd:help "Remote IP address for this tunnel";
-					mandatory true;
 				}
 				leaf local-session-id {
 					type uint32 {
@@ -279,20 +287,17 @@ module vyatta-interfaces-l2tpeth-v1 {
 						error-message "Local-session-id is already in use";
 					}
 					configd:help "Local session ID for this tunnel";
-					mandatory true;
 				}
 				leaf encapsulation {
 					type string;
 					configd:help "Encapsulation of this tunnel interface";
 					configd:allowed "/opt/vyatta/share/tmplscripts/interfaces/l2tpeth/l2tp-session/encapsulation/configd_allowed.sh";
-					mandatory true;
 				}
 				leaf remote-session-id {
 					type uint32 {
 						range 1..max;
 					}
 					configd:help "Remote session ID for this tunnel";
-					mandatory true;
 				}
 			}
 		}

@@ -1,9 +1,9 @@
 #! /usr/bin/perl
 
 #
-# Copyright (c) 2019-2020 AT&T Intellectual Property. All Rights Reserved.
+# Copyright (c) 2019-2021 AT&T Intellectual Property. All Rights Reserved.
 # Copyright (c) 2014-2016, Brocade Communications Systems, Inc.
-# 
+#
 # SPDX-License-Identifier: GPL-2.0-only
 #
 
@@ -70,7 +70,9 @@ if ( $action eq 'SET' ) {
     add_new_session($tunnel, $peer_tunnel, $encap, $local_ip, $peer_ip, 
 		    $port, $session, $peer_session, $cookie, $ifname);
 } elsif ( $action eq 'DELETE' ) {
-    delete_tun_session($old_session);
+	if ( defined($old_session) ) {
+		delete_tun_session($old_session);
+	}
 } elsif ( $action eq 'ACTIVE' ) {
     if ( $cfg->getNodeStatus('l2tp-session') eq 'deleted' ) {
         # configd:defer-actions might calls this with $action ACTIVE
