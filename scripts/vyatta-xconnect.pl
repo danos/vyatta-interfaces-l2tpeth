@@ -1,7 +1,7 @@
 #! /usr/bin/perl
 
 #
-# Copyright (c) 2019 AT&T Intellectual Property. All Rights Reserved.
+# Copyright (c) 2019-2021 AT&T Intellectual Property. All Rights Reserved.
 # Copyright (c) 2014-2016, Brocade Communications Systems, Inc.
 # 
 # SPDX-License-Identifier: GPL-2.0-only
@@ -24,6 +24,20 @@ my ($action, $ifname) = @ARGV;
 my $intf = new Vyatta::Interface($ifname);
 my $cfg = new Vyatta::Config($intf->path());
 my $l2tpifname = $cfg->returnValue('xconnect l2tpeth');
+
+if ( defined($l2tpifname) ) {
+    my $l2tpintf = new Vyatta::Interface($l2tpifname);
+    my $l2tpcfg = new Vyatta::Config($l2tpintf->path());
+    if (not ($l2tpcfg->exists("l2tp-session"))) {
+        # This legacy Perl script handles xconnect for static L2TPv3 sessions
+        # ("l2tp-session" defined for an l2tpeth interface). If the l2tpeth
+        # interface being cross-connected represents in fact a dynamic L2TPv3
+        # session, the xconnect configuration will be done by the L2TPv3 VCI
+        # component.
+        exit 0;
+    }
+}
+
 my $oldl2tpifname = $cfg->returnOrigValue('xconnect l2tpeth');
 my $xconn_ttl = $cfg->returnValue('xconnect ttl');
 my $vhostifname = $cfg->returnValue('xconnect vhost');

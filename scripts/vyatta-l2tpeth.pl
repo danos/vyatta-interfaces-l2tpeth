@@ -60,6 +60,13 @@ if ( $action eq 'SET' ) {
         # In that case, gracefully stop here.
         exit 0;
     }
+    # If the l2tp-session (static L2TP) does not exist, we have nothing to do here.
+    # This is not an error since this would only happen if dynamic L2TPv3 is being
+    # configured instead (control-connection). In such case, the dynamic L2TPv3
+    # VCI component will take care of the session configuration.
+    if (not ($cfg->exists("l2tp-session"))) {
+      exit 0;
+    }
     add_new_session($tunnel, $peer_tunnel, $encap, $local_ip, $peer_ip, 
 		    $port, $session, $peer_session, $cookie, $ifname);
 } elsif ( $action eq 'DELETE' ) {
