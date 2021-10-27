@@ -1,3 +1,10 @@
+vyatta-interfaces-l2tpeth (0.1.15) unstable; urgency=medium
+
+  [ Vinicius Soares ]
+  * Legacy Perl scripts for static L2TPv3 must not be executed for dynamic L2TP
+
+ -- David Stapleton <david.stapleton@intl.att.com>  Wed, 27 Oct 2021 17:21:26 +0100
+
 vyatta-interfaces-l2tpeth (0.1.14) unstable; urgency=medium
 
   [ kalaivani vinothkumar ]
